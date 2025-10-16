@@ -100,7 +100,7 @@ missed_messages_{MISSED_MESSAGES_THRESHOLD}
     throw std::runtime_error{"Failed to create EGM interface"};
   }
   
-  if (!p_interface_->isInitialized())
+  if(!p_interface_->isInitialized())
   {
     throw std::runtime_error{"Failed to initialize EGM interface"};
   }
