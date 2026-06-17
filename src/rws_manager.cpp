@@ -53,8 +53,8 @@ namespace robot
 
 RWSManager::RWSManager(const std::string& ip_address, const unsigned short port_number, const std::string& username,
                        const std::string& password)
-  : client_{ rws::ConnectionOptions(ip_address, port_number, username, password, 1e6, 1e6, 1e6) }
-  , priority_client_{ rws::ConnectionOptions(ip_address, port_number, username, password, 1e6, 1e6, 1e6) }
+  : client_{ rws::ConnectionOptions(ip_address, port_number, username, password, std::chrono::milliseconds {1000}, std::chrono::milliseconds {1000}, std::chrono::milliseconds {1000}) }
+  , priority_client_{ rws::ConnectionOptions(ip_address, port_number, username, password, std::chrono::milliseconds {1000}, std::chrono::milliseconds {1000}, std::chrono::milliseconds {1000}) }
   , interface_{ client_ }
   , priority_interface_{ priority_client_ }
 {
