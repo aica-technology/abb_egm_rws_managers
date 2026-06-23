@@ -77,7 +77,7 @@ RWSManager::RWSManager(rws::ConnectionOptions options)
   , priority_interface_{ priority_client_ }
 {
   system_data_.ip_address = options.ip_address;
-  system_data_.port_number = options.port_number;
+  system_data_.port_number = options.port;
 }
 
 /***********************************************************
