@@ -70,19 +70,14 @@ RWSManager::RWSManager(const std::string& ip_address, const unsigned short port_
   system_data_.port_number = port_number;
 }
 
-RWSManager::RWSManager(const std::string& ip_address, const unsigned short port_number, const std::string& username,
-                       const std::string& password, const std::chrono::milliseconds& socket_receive_timeout,
-                       const std::chrono::milliseconds& socket_send_timeout,
-                       const std::chrono::milliseconds& http_timeout)
-  : client_{ rws::ConnectionOptions(ip_address, port_number, username, password, socket_receive_timeout,
-                                    socket_send_timeout, http_timeout) }
-  , priority_client_{ rws::ConnectionOptions(ip_address, port_number, username, password, socket_receive_timeout,
-                                             socket_send_timeout, http_timeout) }
+RWSManager::RWSManager(rws::ConnectionOptions options)
+  : client_{ options }
+  , priority_client_{ options }
   , interface_{ client_ }
   , priority_interface_{ priority_client_ }
 {
-  system_data_.ip_address = ip_address;
-  system_data_.port_number = port_number;
+  system_data_.ip_address = options.ip_address;
+  system_data_.port_number = options.port_number;
 }
 
 /***********************************************************
