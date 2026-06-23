@@ -68,6 +68,21 @@ public:
              const std::string& password);
 
   /**
+   * \brief Creates a manager for handling communication with the robot controller's RWS server.
+   *
+   * \param ip_address to the RWS server.
+   * \param port_number used by the RWS server.
+   * \param username for the RWS authentication process.
+   * \param password for the RWS authentication process.
+   * \param socket_receive_timeout for RWS socket receive operations.
+   * \param socket_send_timeout for RWS socket send operations.
+   * \param http_timeout for RWS HTTP requests.
+   */
+  RWSManager(const std::string& ip_address, const unsigned short port_number, const std::string& username,
+             const std::string& password, const std::chrono::milliseconds& socket_receive_timeout,
+             const std::chrono::milliseconds& socket_send_timeout, const std::chrono::milliseconds& http_timeout);
+
+  /**
    * \brief Collects key data, about the robot controller's active system, and parses it into a structured description.
    *
    * \param prefix for standardized joint names (i.e. arbitrary prefix for identifying a specific robot controller).

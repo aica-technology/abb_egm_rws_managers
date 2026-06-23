@@ -53,8 +53,8 @@ namespace robot
 
 RWSManager::RWSManager(const std::string& ip_address, const unsigned short port_number, const std::string& username,
                        const std::string& password)
-  : client_{ rws::ConnectionOptions(ip_address, port_number, username, password, std::chrono::milliseconds {1000}, std::chrono::milliseconds {1000}, std::chrono::milliseconds {1000}) }
-  , priority_client_{ rws::ConnectionOptions(ip_address, port_number, username, password, std::chrono::milliseconds {1000}, std::chrono::milliseconds {1000}, std::chrono::milliseconds {1000}) }
+  : client_{ rws::ConnectionOptions(ip_address, port_number, username, password) }
+  , priority_client_{ rws::ConnectionOptions(ip_address, port_number, username, password) }
   , interface_{ client_ }
   , priority_interface_{ priority_client_ }
 {
@@ -66,6 +66,21 @@ RWSManager::RWSManager(const std::string& ip_address, const unsigned short port_
   // interface_.setHTTPTimeout(1e6);
   // priority_interface_.setHTTPTimeout(1e6);
 
+  system_data_.ip_address = ip_address;
+  system_data_.port_number = port_number;
+}
+
+RWSManager::RWSManager(const std::string& ip_address, const unsigned short port_number, const std::string& username,
+                       const std::string& password, const std::chrono::milliseconds& socket_receive_timeout,
+                       const std::chrono::milliseconds& socket_send_timeout,
+                       const std::chrono::milliseconds& http_timeout)
+  : client_{ rws::ConnectionOptions(ip_address, port_number, username, password, socket_receive_timeout,
+                                    socket_send_timeout, http_timeout) }
+  , priority_client_{ rws::ConnectionOptions(ip_address, port_number, username, password, socket_receive_timeout,
+                                             socket_send_timeout, http_timeout) }
+  , interface_{ client_ }
+  , priority_interface_{ priority_client_ }
+{
   system_data_.ip_address = ip_address;
   system_data_.port_number = port_number;
 }
