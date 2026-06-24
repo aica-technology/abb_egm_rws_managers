@@ -70,6 +70,16 @@ RWSManager::RWSManager(const std::string& ip_address, const unsigned short port_
   system_data_.port_number = port_number;
 }
 
+RWSManager::RWSManager(rws::ConnectionOptions options)
+  : client_{ options }
+  , priority_client_{ options }
+  , interface_{ client_ }
+  , priority_interface_{ priority_client_ }
+{
+  system_data_.ip_address = options.ip_address;
+  system_data_.port_number = options.port;
+}
+
 /***********************************************************
  * Primary methods (for the lower priority RWS interface)
  */

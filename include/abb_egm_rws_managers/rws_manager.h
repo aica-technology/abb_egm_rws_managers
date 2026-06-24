@@ -68,6 +68,13 @@ public:
              const std::string& password);
 
   /**
+   * \brief Creates a manager for handling communication with the robot controller's RWS server.
+   *
+   * \param options for the RWS connection.
+   */
+  RWSManager(rws::ConnectionOptions options);
+
+  /**
    * \brief Collects key data, about the robot controller's active system, and parses it into a structured description.
    *
    * \param prefix for standardized joint names (i.e. arbitrary prefix for identifying a specific robot controller).
